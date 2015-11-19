@@ -1,7 +1,37 @@
+gitlab:
+    image: quay.io/sameersbn/gitlab:latest
+    container_name: gitlab
+    restart: always
+    external_links:
+        - redis:redisio
+        - prod-postgres:postgresql
+    hostname: gitlab.intranet.studitemps.de
+    volumes:
+        - /opt/docker-volume/gitlab:/home/git/data
+    ports:
+        - '10022:22'
+        - '10080:80'
+    environment:
+        - GITLAB_PORT=10080
+        - GITLAB_SSH_PORT=10022
+        - DB_HOST=postgresql
+        - DB_TYPE=postgres
+        - DB_NAME=gitlab
+        - DB_USER=gitlab
+        - GITLAB_HOST=gitlab.intranet.studitemps.de
+        - GITLAB_EMAIL=gitlab@intranet.studitemps.de
+        - GITLAB_EMAIL_ENABLED=true
+        - SMTP_ENABLED=true
+        - SMTP_DOMAIN=mailrelay.intranet.studitemps.de
+        - SMTP_HOST=mailrelay.intranet.studitemps.de
+        - SMTP_PORT=25
+        - SMTP_STARTTLS=false
+        - GITLAB_SECRETS_DB_KEY_BASE
+        - DB_PASS
 gitlabrunner:
     image: registry.intranet.studitemps.de/studitemps/gitlab-ci-multi-runner:latest
     restart: always
-    external_links:
+    links:
         - gitlab
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
