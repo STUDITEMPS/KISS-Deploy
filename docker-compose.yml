@@ -10,6 +10,6 @@ gitlabrunner:
         - /kiss/:/kiss/
     environment:
         - CI_SERVER_URL=http://gitlab/ci
-        - RUNNER_TOKEN=1a63de8d4ffc622faa90
+        - RUNNER_TOKEN
         - RUNNER_DESCRIPTION=gitlab-multirunner
         - RUNNER_EXECUTOR=shell
