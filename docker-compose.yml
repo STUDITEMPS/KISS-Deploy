@@ -1,0 +1,15 @@
+gitlabrunner:
+    image: registry.intranet.studitemps.de/studitemps/gitlab-ci-multi-runner:latest
+    restart: always
+    external_links:
+        - gitlab
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /usr/bin/docker:/bin/docker
+        - /opt/docker-volume/:/opt/docker-volume/
+        - /kiss/:/kiss/
+    environment:
+        - CI_SERVER_URL=http://gitlab/ci
+        - RUNNER_TOKEN=1a63de8d4ffc622faa90
+        - RUNNER_DESCRIPTION=gitlab-multirunner
+        - RUNNER_EXECUTOR=shell

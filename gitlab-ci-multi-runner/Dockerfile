@@ -7,3 +7,5 @@ RUN apt-get update && \
     apt-get install -y lxc python-pip
 RUN pip install docker-compose
 
+VOLUME /home/gitlab_ci_multi_runner/data
+
